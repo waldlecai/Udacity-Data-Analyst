@@ -1,0 +1,5 @@
+Mapzen.com map link: 
+https://s3.amazonaws.com/metro-extracts.mapzen.com/hong-kong_china.osm.bz2
+
+Note:
+The Hongkong OSM data was selected for the project given that I live around Hongkong area and more familiar with it.

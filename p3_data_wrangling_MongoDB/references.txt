@@ -1,0 +1,3 @@
+References:
+1. Mapzen.com to extract area map data: https://s3.amazonaws.com/metro-extracts.mapzen.com/hong-kong_china.osm.bz2
+2. Characters in key: https://taginfo.openstreetmap.org/reports/characters_in_keys
