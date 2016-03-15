@@ -9,9 +9,11 @@
       h2 {
         text-align: center;
       }
+
     </style>
 
     <script type="text/javascript">
+
       function draw(data) {
       
       /*
@@ -41,9 +43,21 @@
           myChart.addPctAxis("x", "Count");
           myChart.addCategoryAxis("y", ["Pclass", "Sex"]);
           myChart.addSeries("Survived", dimple.plot.bar);
-          myChart.addLegend(900, 10, 380, 20, "right");
+          var myLegend = myChart.addLegend(900, 10, 380, 20, "right");
           myChart.draw();
-          
+
+          // customize dimple elements for better readibility 
+          d3.select(".dimple-legend-key.dimple-1").attr("x", 1180);
+          d3.select(".dimple-legend-text.dimple-1").text("Survived") //'Survived' instead of '1' for easier interpretation
+                                                    .attr("x", 1200)
+                                                    .style("font-size", "12px");
+          d3.select(".dimple-legend-key.dimple-0").attr("x", 1180)
+                                                  .attr("y", 30);
+          d3.select(".dimple-legend-text.dimple-0").text("Died") ////'Survived' instead of '1' for easier interpretation
+                                                    .attr("x", 1200)
+                                                    .attr("y", 40)
+                                                    .style("font-size", "12px");
+          d3.selectAll(".dimple-axis.dimple-title").style("font-size", "12px");
         };
 
     </script>
