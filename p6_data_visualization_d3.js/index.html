@@ -4,10 +4,16 @@
     <meta charset="utf-8">
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
-    
+
     <style>
+
       h2 {
         text-align: center;
+      }
+
+      .chartDesc {
+        margin-left: 125px;
+        margin-right: 220px;
       }
 
     </style>
@@ -15,60 +21,77 @@
     <script type="text/javascript">
 
       function draw(data) {
-      
-      /*
-        D3.js setup code
-      */
-          "use strict";
-          var margin = 75,
-              width = 1400 - margin,
-              height = 600 - margin;
 
-          d3.select("body")
-            .append("h2")
-            .text("Who More Likely to Survive in Titanic")
+        // D3.js setup code
+        "use strict";
+        var margin = 75,
+        width = 1400 - margin,
+        height = 600 - margin;
 
-          var svg = d3.select("body")
-            .append("svg")
-              .attr("width", width + margin)
-              .attr("height", height + margin)
-            .append('g')
-                .attr('class','chart');
+        d3.select(".chartTitle")
+        .append("h2")
+        .text("Who More Likely to Survive in Titanic")
 
-      /*
-        Dimple.js Chart construction code
-      */
+        var svg = d3.select(".chartContainer")
+                    .append("svg")
+                      .attr("width", width + margin)
+                      .attr("height", height + margin)
+                    .append('g')
+                      .attr('class','chart');
 
-          var myChart = new dimple.chart(svg, data);
-          myChart.addPctAxis("x", "Count");
-          myChart.addCategoryAxis("y", ["Pclass", "Sex"]);
-          myChart.addSeries("Survived", dimple.plot.bar);
-          var myLegend = myChart.addLegend(900, 10, 380, 20, "right");
-          myChart.draw();
+        //Dimple.js Chart construction code
+        var myChart = new dimple.chart(svg, data);
+        myChart.addPctAxis("x", "Count");
+        myChart.addCategoryAxis("y", ["Pclass", "Sex"]);
+        myChart.addSeries("Survived", dimple.plot.bar);
+        var myLegend = myChart.addLegend(900, 10, 380, 20, "right");
+        myChart.draw();
 
-          // customize dimple elements for better readibility 
-          d3.select(".dimple-legend-key.dimple-1").attr("x", 1180);
-          d3.select(".dimple-legend-text.dimple-1").text("Survived") //'Survived' instead of '1' for easier interpretation
-                                                    .attr("x", 1200)
-                                                    .style("font-size", "12px");
-          d3.select(".dimple-legend-key.dimple-0").attr("x", 1180)
-                                                  .attr("y", 30);
-          d3.select(".dimple-legend-text.dimple-0").text("Died") ////'Survived' instead of '1' for easier interpretation
-                                                    .attr("x", 1200)
-                                                    .attr("y", 40)
-                                                    .style("font-size", "12px");
-          d3.selectAll(".dimple-axis.dimple-title").style("font-size", "12px");
-        };
+        /* 
+          following blocks of code customize dimple 
+          elements for better readibility
+        */
+
+        d3.select(".dimple-legend-key.dimple-1")
+          .attr("x", 1180);
+        //'Survived' instead of '1' for easier interpretation
+        d3.select(".dimple-legend-text.dimple-1")
+          .text("Survived")
+          .attr("x", 1200)
+          .style("font-size", "12px");
+
+        d3.select(".dimple-legend-key.dimple-0")
+          .attr("x", 1180)
+          .attr("y", 30);
+        //'Died' instead of '0' for easier interpretation
+        d3.select(".dimple-legend-text.dimple-0")
+          .text("Died")
+          .attr("x", 1200)
+          .attr("y", 40)
+          .style("font-size", "12px");
+        
+        d3.selectAll(".dimple-axis.dimple-title")
+          .style("font-size", "12px");
+      };
 
     </script>
   </head>
-<body>
-  <script type="text/javascript">
-  /*
-    Use D3 (not dimple.js) to load the TSV file
-    and pass the contents of it to the draw function
-    */
-  d3.csv("/data/train.csv", draw);
-  </script>
-</body>
+  <body>
+    <script type="text/javascript">
+      //Use D3 to load the CSV file and pass data to the draw function
+      d3.csv("data/train.csv", draw);
+    </script>
+    <div class="chartTitle">
+    </div>
+    <div class="chartContainer">
+    </div>
+    <div class="chartDesc">
+      <p>
+        The sinking of the RMS Titanic is one of the most infamous shipwrecks in history.  On April 15, 1912, during her maiden voyage, the Titanic sank after colliding with an iceberg, killing 1502 out of 2224 passengers and crew. This sensational tragedy shocked the international community and led to better safety regulations for ships.
+      </p>
+        This data visualization shows the Titanic dataset analysis finding on demographics and passenger information between those passengers who survived and those who died. The Titanic dataset is available <a href="https://www.kaggle.com/c/titanic">Kaggle</a>, which contains 891 passengers' information including Survivability, Passenger Class (i.e. 1, 2, 3), Name, Sex, Age, Number of Siblings/Spouses Aboard, Number of Parents/Children Aboard, Ticket Number, Passenger Fare, Cabin, Port of Embarkation.
+      <p>
+      </p>
+    </div>
+  </body>
 </html>
